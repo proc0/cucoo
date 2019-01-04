@@ -5,50 +5,59 @@ import datetime
 import os
 import winsound
 
-FREQ = 1500
-DURN = 500
-NY2019 = datetime.datetime(2019, 1, 1, 0, 0, 0)
+YEAR = time.localtime().tm_year
+NYE = datetime.datetime(YEAR, 1, 1, 0, 0, 0)
 
-get_elapsed = lambda year: int(math.floor((time.time() - time.mktime(year.timetuple()))/3600))
+# hours since last NYE midnight
+get_delta = lambda year: int(math.floor((time.time() - time.mktime(year.timetuple()))/3600))
+# hours until new year
 get_remains = lambda elaps: 8760 - elaps
-get_hours = lambda year: get_remains(get_elapsed(year))
+# seconds until next hour (minus check time)
+get_sleeptime = lambda local: (60 - local.tm_min)*60 - (local.tm_sec + 1)
 
-def get_sleep_time(oclock = False):
-  sleep_time = None
-  if(oclock):
-    sleep_time = 3599
-  else: 
-    local_time = time.localtime()
-    current_min = local_time.tm_min
-    current_sec = local_time.tm_sec
-    sleep_time = (60-current_min)*60 - (current_sec + 1)
-  return sleep_time
-
-def cucoo(elaps):
+# output functions
+def beep():
   if(winsound):
-    winsound.Beep(FREQ, DURN)
-    winsound.Beep(FREQ, DURN)
+    winsound.Beep(1500, 500)
+    winsound.Beep(1500, 500)
   else:
     os.system("echo -n '\a'")
-  
-  print('+----------------------------------------------+')
-  print(' ' + str(get_remains(elaps)) + ' hours remain on the ' + str(elaps) + '* hour of 2019.')
+    os.system("echo -n '\a'")
+
+def cucoo(hours):
+  beep()
+  print('+------------------------------------------+')
+  print(' ' + str(get_remains(hours)) + ' hours remain on the ' + str(hours) + '* hour of ' + str(YEAR))
+
+def countdown():
+  # NEXT: implement second countdown
+  print('Last hour of the year!')
+  for _ in range(0,5):
+    beep()
+# --
 
 def main():
-  elapsed = get_elapsed(NY2019)
-  cucoo(elapsed)
-  while(get_elapsed(NY2019) - elapsed >= 0):
-    new_elaps = get_elapsed(NY2019)
-    if(new_elaps - elapsed == 1):
-      elapsed = new_elaps
-      cucoo(elapsed)
-      time.sleep(get_sleep_time(True))
+  delta = get_delta(NYE)
+  cucoo(delta)
+  # check until time delta is negative
+  while(get_delta(NYE) - delta >= 0):
+    theta = get_delta(NYE)
+    # hour o'clock
+    if(theta - delta == 1):
+      # update delta
+      delta = theta
+      cucoo(delta)
+      # wait til next check
+      time.sleep(3599)
     else:
-      sleep_time = get_sleep_time()
+      # update delta
+      delta = get_delta(NYE)
+      sleep_time = get_sleeptime(time.localtime())
+      # wait if more than a second
       if(sleep_time > 1):
         time.sleep(sleep_time)
   else:
-    print('Happy New Year!')
+    countdown()
     exit(0)
 
-if __name__ == 'cucoo': main()
+if __name__ == '__main__': main()
