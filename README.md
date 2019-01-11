@@ -1,4 +1,4 @@
-# NYE Countdown
+# Cucoo: NYE Countdown
 
 Alerts hourly information. Which hour is it now, and how many hours left until next year? 
 
