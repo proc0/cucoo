@@ -11,16 +11,18 @@ def cuckoo():
 
 def nth_hour(hours):
   hr = str(hours)
-  nth_hr = hr
-  if(hr[-1] == '1'):
-    nth_hr = hr + 'st'
-  elif(hr[-1] == '2'):
-    nth_hr = hr + 'nd'
-  elif(hr[-1] == '3'):
-    nth_hr = hr + 'rd'
-  else:
-    nth_hr = hr + 'th'
-    
+  nth_hr = hr + 'th'
+
+  if(hours < 4 or hours > 20):
+    if(hr[-1] == '1'):
+      nth_hr = hr + 'st'
+    elif(hr[-1] == '2'):
+      nth_hr = hr + 'nd'
+    elif(hr[-1] == '3'):
+      nth_hr = hr + 'rd'
+    else:
+      nth_hr = hr + 'th'
+
   return nth_hr
 
 def alert(hours, year):
