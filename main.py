@@ -1,5 +1,6 @@
 #!/bin/env python
 import time
+from src.const import *
 from src.view import (
   get_sleeptime, 
   delta_now, 
