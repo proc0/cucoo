@@ -1,6 +1,11 @@
 #!/bin/env python
 import time
-from src.view import *
+from src.view import (
+  get_sleeptime, 
+  delta_now, 
+  alert, 
+  countdown
+)
 
 def main(year):
   delta = delta_now(year)
