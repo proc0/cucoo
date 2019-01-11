@@ -1,5 +1,13 @@
-# NY 2020 hourly countdown
+# NYE Countdown
 
+Alerts hourly information. Which hour is it now, and how many hours left until next year? 
+
+## Run
+```bash
+python main.py
 ```
-python cucoo.py
+
+## Test
+```bash
+python test.py
 ```

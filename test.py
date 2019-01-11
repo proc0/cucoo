@@ -1,6 +1,6 @@
 import unittest
 import datetime
-from cucoo import get_sleeptime, get_delta
+from src.model import *
 
 class TestStringMethods(unittest.TestCase):
 
