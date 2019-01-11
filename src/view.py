@@ -6,6 +6,8 @@ def cuckoo():
   if(os.sys.platform == 'win32'):
     import winsound
     winsound.PlaySound('../res/cuckoo.wav', winsound.SND_FILENAME)
+  elif(os.system('afplay &>/dev/null') == 256):
+    os.system('afplay ./res/cuckoo.wav')
   else:
     os.system('echo "\007"')
 
