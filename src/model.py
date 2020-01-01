@@ -6,7 +6,7 @@ from src.const import *
 # get last NYE datetime
 get_nye = lambda year: datetime.datetime(year, 1, 1, 0, 0, 0)
 # calculates hours since last NYE midnight
-get_delta = lambda year, now: int(math.floor((now - time.mktime(year.timetuple()))/TOTAL_SEC))
+get_delta = lambda year, now: int(math.ceil((now - time.mktime(year.timetuple()))/TOTAL_SEC))
 # wrapper to calculate current delta
 delta_now = lambda year: get_delta(get_nye(year), time.time())
 
