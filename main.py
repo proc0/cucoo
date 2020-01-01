@@ -12,7 +12,7 @@ def main(year):
   delta = delta_now(year)
   alert(delta, year)
   # check until time delta is negative
-  while(delta_now(year) - delta >= 0):
+  while(delta_now(year) - delta > 0):
     epsilon = delta_now(year)
     # hour o'clock
     if(epsilon - delta == 1):
@@ -30,7 +30,6 @@ def main(year):
         time.sleep(sleep_time)
   else:
     countdown()
-    exit(0)
 
 if __name__ == '__main__': 
   main(time.localtime().tm_year)

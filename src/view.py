@@ -36,6 +36,6 @@ def alert(hours, year):
 
 def countdown():
   # NEXT: implement second countdown
-  print('Last hour of the year!')
+  print('happy new year!')
   for _ in range(0,5):
     cuckoo()
